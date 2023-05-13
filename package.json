@@ -1,0 +1,26 @@
+{
+  "name": "nodejs-express",
+  "version": "1.0.0",
+  "description": "o que significa o REST (Representational State Trasfer)?\r conceito de recurso\r cada recurso tem uma URI\r /livros /autores /editoras\r comunicação stateless (sem estado)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AluraCourses/NodeJs-Express.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AluraCourses/NodeJs-Express/issues"
+  },
+  "homepage": "https://github.com/AluraCourses/NodeJs-Express#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
+  }
+}
