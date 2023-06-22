@@ -21,6 +21,8 @@
   "homepage": "https://github.com/AluraCourses/NodeJs-Express#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "mongodb": "^5.5.0",
+    "mongoose": "^7.2.1",
     "nodemon": "^2.0.22"
   }
 }
