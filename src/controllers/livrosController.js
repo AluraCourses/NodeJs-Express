@@ -14,6 +14,17 @@ class LivroController {
         }
     }
 
+    static listarLivroPorEditora = async (req, res) => {
+        try {
+            const editora = req.query.editora;
+            const livrosEncontrados = await livros.find({ editora: editora }).exec();
+            res.status(200).json(livrosEncontrados);
+        } catch (err) {
+            res.status(500).json({ error: 'Erro ao buscar livros por editora' });
+        }
+    }
+    
+
     static listarLivroPorId = async (req, res) => {
         try {
             const id = req.params.id;
