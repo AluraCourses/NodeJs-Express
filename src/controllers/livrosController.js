@@ -1,5 +1,5 @@
 import NaoEncontrado from "../errors/NaoEncontrado.js";
-import livros from "../models/Livro.js";
+import { livros } from "../models/index.js";
 
 class LivroController {
 
@@ -14,10 +14,18 @@ class LivroController {
     }
   };
 
-  static listarLivroPorEditora = async (req, res, next) => {
+  static listarLivroPorFiltro = async (req, res, next) => {
     try {
-      const editora = req.query.editora;
-      const livrosEncontrados = await livros.find({ editora: editora }).exec();
+      const { editora , titulo } = req.query;
+
+      const busca = {};
+
+      if (editora) busca.editora = editora;
+      if (titulo) busca.titulo =  titulo;
+
+      const livrosEncontrados = await livros.find(busca)
+        .exec();
+
       res.status(200).json(livrosEncontrados);
     } catch (err) {
       next(err);
