@@ -7,7 +7,7 @@ class ErroValidacao extends RequisicaoIncorreta {
       .join("; ");
 
 
-    super(`Os seguintes erros foram encontrados ${mensagensErro}`);
+    super(`Os seguintes erros foram encontrados: ${mensagensErro}`);
   }
 }
 
