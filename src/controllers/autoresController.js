@@ -3,10 +3,13 @@ import { autores } from "../models/index.js";
 
 class AutorController {
 
-  static listarautores = async (req, res) => {
+  static listarAutores = async (req, res, next) => {
     try {
-      const autoresEncontrados = await autores.find().exec();
-      res.status(200).json(autoresEncontrados);
+      const autoresEncontrados = autores.find();
+      
+      req.resultado = autoresEncontrados;
+
+      next();
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: "Erro ao buscar autores" });

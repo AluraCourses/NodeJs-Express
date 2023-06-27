@@ -3,12 +3,15 @@ import { autores, livros } from "../models/index.js";
 
 class LivroController {
 
+  //LISTAGEM COM PAGINAÇÃO PASSANDO LIMITE E PAGINA CASO INFORMADO
+  //LISTAGEM COM ORDENAÇÃO PASSANDO NO PADRÃO "ATRIBUTO:1" OU "ATRIBUTO:-1"
   static listarLivros = async (req, res, next) => {
     try {
-      const livrosEncontrados = await livros.find()
-        .populate("autor")
-        .exec();
-      res.status(200).json(livrosEncontrados);
+      const buscaLivros = livros.find();
+
+      req.resultado = buscaLivros;
+
+      next();    
     } catch (err) {
       next(err);
     }
@@ -16,15 +19,16 @@ class LivroController {
 
   static listarLivroPorFiltro = async (req, res, next) => {
     try {
-
       const busca = await processaBusca(req.query);
 
       if (busca !== null) {
-        const livrosEncontrados = await livros
+        const livrosEncontrados = livros
           .find(busca)
           .populate("autor");
 
-        res.status(200).json(livrosEncontrados);
+        req.resultado = livrosEncontrados;
+
+        next();    
       } else {
         res.status(200).send([]);
       }
@@ -64,8 +68,8 @@ class LivroController {
   static atualizarLivro = async (req, res, next) => {
     try {
       const id = req.params.id;
-      const livrosEncontrados = await livros.findByIdAndUpdate(id, {$set: req.body});
-      if(livrosEncontrados !== null){
+      const livroEncontrado = await livros.findByIdAndUpdate(id, {$set: req.body});
+      if(livroEncontrado !== null){
         res.status(200).send({message: "Livro atualizado com sucesso!"});
       } else {
         next(new NaoEncontrado("ID de livro não encontrado para alteração."));
